@@ -60,7 +60,7 @@ func (m mainModel) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 			return m, tea.Quit
 		case "ctrl+n":
 			return newModelRandom(m.rule, m.chanceForLife), nil
-		case "alt+n":
+		case "alt+n", "˜":
 			return newModelCenterBlock(m.rule, m.chanceForLife), nil
 		case " ":
 			return m, m.tickWatch.Toggle()
@@ -156,5 +156,7 @@ func main() {
 
 func getTerminalSize() (width, height int) {
 	width, height, _ = term.GetSize(int(os.Stdout.Fd()))
+	width = max(width, 30)
+	height = max(height, 30)
 	return
 }
